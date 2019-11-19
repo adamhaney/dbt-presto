@@ -186,7 +186,7 @@ class PrestoConnectionManager(SQLConnectionManager):
             catalog=credentials.database,
             schema=credentials.schema,
             auth=auth,
-            isolation_level=IsolationLevel.SERIALIZABLE,
+            isolation_level=IsolationLevel.AUTOCOMMIT,
         )
         connection.state = 'open'
         connection.handle = ConnectionWrapper(presto_conn)
