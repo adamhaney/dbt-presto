@@ -86,7 +86,10 @@
 
 {% macro presto__rename_relation(from_relation, to_relation) -%}
   {% call statement('rename_relation') -%}
-    alter table {{ from_relation }} rename to {{ to_relation }}
+-- alter table {{ from_relation }} rename to {{ to_relation }}
+DROP TABLE IF EXISTS {{ to_relation }};
+CREATE TABLE {{ to_relation }}
+AS ( SELECT * FROM {{ from_relation }});
   {%- endcall %}
 {% endmacro %}
 
